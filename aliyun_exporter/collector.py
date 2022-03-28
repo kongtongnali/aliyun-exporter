@@ -1,3 +1,4 @@
+#add self labels
 import json
 import logging
 import time
@@ -29,6 +30,7 @@ class CollectorConfig(object):
                  credential=None,
                  metrics=None,
                  info_metrics=None,
+                 labels_one = None,
                  ):
         # if metrics is None:
         # raise Exception('Metrics config must be set.')
@@ -37,6 +39,7 @@ class CollectorConfig(object):
         self.metrics = metrics
         self.rate_limit = rate_limit
         self.info_metrics = info_metrics
+        self.labels_one = labels_one
 
         # ENV
         access_id = os.environ.get('ALIYUN_ACCESS_ID')
@@ -87,6 +90,9 @@ class AliyunCollector(object):
             else:
                 requestSummary.labels(project).observe(time.time() - start_time)
         data = json.loads(resp)
+        '''
+        此处做数据处理
+        '''
         if 'Datapoints' in data:
             points = json.loads(data['Datapoints'])
             return points
