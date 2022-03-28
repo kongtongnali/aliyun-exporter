@@ -76,6 +76,7 @@ metrics:
   acs_mongodb:
   - name: CPUUtilization
     period: 300
+    measure: Maximum # default=avg
 ```
 
 Run the exporter:
